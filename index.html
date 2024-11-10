@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: black;
+            padding: 20px;
+            margin: 70px;
+            cursor: none;
+        }
+
+        #englishText {
+            position: absolute;
+            top: 460px;
+            font-weight: bold;
+            padding: 1px;
+            text-align: center;
+            color: rgb(255, 0, 0);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            margin: 20px;
+            width: 50%;
+            z-index: 1;
+        }
+
+        #hebrewText {
+            position: absolute;
+            top: 460px;
+            font-weight: bold;
+            padding: 1px;
+            text-align: center;
+            color: rgb(255, 0, 0);
+            background-color: black;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 20px;
+            margin: 20px;
+            width: 50%;
+            z-index: 3;
+            mask-image: none;
+            -webkit-mask-image: none;
+        }
+
+        .image {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 60%;
+        }
+
+        .button {
+            position: absolute;
+            top: 800px;
+            border: 1px solid red;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            margin-top: 20px;
+            box-shadow: red 0 0 20px 2px;
+        }
+
+        #cursor {
+            position: fixed;
+            height: 150px;
+            width: 150px;
+            background: radial-gradient(circle, transparent 0%, black 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="image" style="opacity:60%">
+        <img src="azazel_1.jpg" style="width: 80%">
+    </div>
+    <br>
+    <p id="hebrewText">ועזאל לימד בני אדם לעשות חרבות, וסכינים, ומגנים וחושינים, והודיע ​להם את מתכות האדמה ואת אומנות עיבודם, וצמידים וקישוטים, ושימוש באנטימון ובייפותם של. העפעפיים, וכל מיני אבנים יקרות, וכל תמיסות צביעה. וַיָּקָם רַב רַב אֱלֹהִים, וַיִּזְנוּ, וַיִּתְעוּ וַיִּשְׁחִיתוּ בְּכָל דַּרְכֵיהֶם.<br><br><br><br>ספר המשגיחים</p>
+    
+    <p id="englishText">And Azâzêl taught men to make swords, and knives, and shields, and breastplates, and made known to them the metals of the earth and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all coloring tinctures. And there arose much godlessness, and they committed fornication, and they were led astray, and became corrupt in all their ways.<br><br>Book of the Watchers</p>
+    
+    <div class="button"><a href="summoning.html" style="color: red">CLICK TO CLEANSE</a></div>
+
+    <div id="cursor"></div>
+    <audio src="622603__nlux__choir-of-moaning-angels.wav" autoplay loop></audio>
+
+    <script> 
+        const cursor = document.getElementById("cursor");
+        const hebrewText = document.getElementById("hebrewText");
+        
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";            
+            const rect = hebrewText.getBoundingClientRect();           
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;           
+            const maskSize = 150;
+            hebrewText.style.webkitMaskImage = `radial-gradient(circle ${maskSize}px at ${x}px ${y}px, transparent 0%, black 50%)`;
+            hebrewText.style.maskImage = `radial-gradient(circle ${maskSize}px at ${x}px ${y}px, transparent 0%, black 50%)`;
+        });
+    </script>
+</body>
+</html>
+
+
+// Randomize position of draggable images > how do i get them to spread out and not get cut off?
+      function randomizePositions() {
+        $(".draggable-image").each(function() {
+          const maxTop = window.innerHeight - $(this).height();
+          const maxLeft = window.innerWidth - $(this).width();
+
+          const randomTop = Math.floor(Math.random() * maxTop);
+          const randomLeft = Math.floor(Math.random() * maxLeft);
+
+          $(this).css({ top: randomTop + "px", left: randomLeft + "px" });
+        });
+      } 
+
+      randomizePositions();
