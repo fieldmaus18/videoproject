@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: content-box;
+        }
+        
+        canvas, body {
+            margin: 10px;
+            padding: 0;
+            background-color: black;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            height: 80vh;
+        }
+        .canvases {
+            display: flex;
+            width: 80vw;
+            height: 100vh;
+            align-items: center;
+        }
+        .left-canvas, .right-canvas {
+            width: 50%;
+            height: 80%;
+        }
+        .progress-container {
+            width: 30vw;
+            height: 10px;
+            background-color: #000000;
+            border-radius: 0px;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background-color: rgb(0, 0, 0);
+            border-radius: 0px;
+        }
+
+        .text {
+            display: flex;
+            color: red;
+            font-family: 'Courier New', Courier, monospace;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="canvases">
+            <canvas class="left-canvas"></canvas>
+            <canvas class="right-canvas"></canvas>
+        </div>
+        <br>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <br>
+        <br>
+        <div class="text" id="text"></div>
+    </div>
+    <audio src="232325__funkymuskrat__bakteria-menace-3.wav" autoplay loop></audio>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Setup canvases
+        var canvasLeft = document.querySelector(".left-canvas");
+        var canvasRight = document.querySelector(".right-canvas");
+        canvasLeft.width = window.innerWidth / 2;
+        canvasLeft.height = window.innerHeight * 0.8;
+        canvasRight.width = window.innerWidth / 2;
+        canvasRight.height = window.innerHeight * 0.8;
+
+        var ctxLeft = canvasLeft.getContext("2d");
+        var ctxRight = canvasRight.getContext("2d");
+        var pause = false;
+        var startTime = Date.now();
+        var duration = 30000; // 30 seconds
+
+        setTimeout(function() {
+            pause = true; // Set pause to true after 30 seconds
+        }, duration);
+
+        setInterval(animate, 1000 / 24); // 24 FPS
+
+        function updateProgress() {
+            var elapsedTime = Date.now() - startTime;
+            var progress = Math.min(elapsedTime / duration, 1); // Calculate progress as a percentage
+            document.getElementById('progressBar').style.width = (progress * 100) + '%';
+        
+            var textElement = document.getElementById('text');
+            if (progress < 1) {
+                textElement.textContent = `>> Generating ... ${(progress * 100).toFixed(0)}% <<`;
+            } else {
+                textElement.textContent = "AN ANGEL HAS BEEN BORN.";
+            }
+        }
+
+        var ptheta = 50;
+        var theta = 50;
+        var px = 0;
+        var py = 0;
+
+        var offsetX = 0; // X offset for the quarter
+        var offsetY = 0; // Y offset for the quarter
+        var width = canvasLeft.width;  // Width of the quarter
+        var height = canvasLeft.height; // Height of the quarter
+
+        var x = offsetX + width; 
+        var y = offsetY + height / 2;
+        var a = 0.3;
+
+        var lines = [];
+
+        function animate() {
+            updateProgress(); // Update the progress bar
+
+            ctxLeft.clearRect(0, 0, canvasLeft.width, canvasLeft.height);
+            ctxRight.clearRect(0, 0, canvasRight.width, canvasRight.height);
+
+            ctxLeft.fillStyle = ctxRight.fillStyle = 'rgba(0, 0, 0, 1)';
+            ctxLeft.fillRect(0, 0, canvasLeft.width, canvasLeft.height);
+            ctxRight.fillRect(0, 0, canvasRight.width, canvasRight.height);
+
+            if (!pause) {
+                var rand = Math.random();
+                var angleVar = ((2 * rand - 1) * a * Math.PI);
+                theta = ptheta + angleVar;
+                px = x;
+                py = y;
+                var r = Math.random() * 20;
+
+                x = Math.max(offsetX, Math.min(offsetX + width, px + r * Math.cos(ptheta)));
+                y = Math.max(offsetY, Math.min(offsetY + height, py + r * Math.sin(ptheta)));
+                
+                ptheta = theta;
+
+                lines.push({ x1: px, y1: py, x2: x, y2: y, alpha: 1 });
+            }
+
+            for (var i = 0; i < lines.length; i++) {
+                var line = lines[i];
+                
+                ctxLeft.shadowColor = 'rgba(255, 0, 0, 1)';
+                ctxLeft.shadowBlur = 20;
+                ctxLeft.lineWidth = ctxRight.lineWidth = 5;
+                ctxLeft.strokeStyle = ctxRight.strokeStyle = `rgba(255, 0, 0, ${line.alpha})`;
+
+                ctxLeft.beginPath();
+                ctxLeft.moveTo(line.x1, line.y1);
+                ctxLeft.lineTo(line.x2, line.y2);
+                ctxLeft.lineCap = "round";
+                ctxLeft.stroke();
+
+                ctxLeft.shadowColor = 'transparent'; // Reset shadow color
+
+                ctxRight.shadowColor = 'rgba(255, 0, 0, 0.8)';
+                ctxRight.shadowBlur = 20;
+                ctxRight.lineWidth = 5;
+                ctxRight.strokeStyle = `rgba(255, 0, 0, ${line.alpha})`;
+
+                ctxRight.beginPath();
+                ctxRight.moveTo(width - line.x1, line.y1);
+                ctxRight.lineTo(width - line.x2, line.y2);
+                ctxRight.lineCap = "round";
+                ctxRight.stroke();
+                
+                ctxRight.shadowColor = 'transparent'; // Reset shadow color
+            
+                line.alpha -= 0.001; // Adjust fade speed
+            }
+
+            lines = lines.filter(line => line.alpha > 0);
+        }
+    </script>
+</body>
+</html>
