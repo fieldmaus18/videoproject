@@ -10,125 +10,141 @@
             padding: 0;
             overflow: hidden;
         }
-        
+
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: black;
+            background-image: url(pink-bg.jpeg);
+            margin: 90px;
+            margin-top: 10px;
+            margin-bottom: 10px;
             padding: 20px;
-            margin: 40px;
-            cursor: none;
         }
 
-        #englishText {
-            position: absolute;
-            top: 360px;
-            font-weight: bold;
-            padding: 1px;
-            text-align: center;
-            color: rgb(255, 0, 0);
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 18px;
-            margin: 20px;
-            width: 50%;
-            z-index: 1;
-        }
-
-        #hebrewText {
-            position: absolute;
-            top: 360px;
-            font-weight: bold;
-            padding: 6px;
-            text-align: center;
-            color: rgb(255, 0, 0);
-            background-color: black;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 20px;
-            margin: 21px;
-            width: 50%;
-            z-index: 3;
-            mask-image: none;
-            -webkit-mask-image: none;
-        }
-
-        .image {
-            position: absolute;
+        .flexbox-container1 {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 60%;
+            flex: 1;
+        }
+
+        .flex-item-small {
+            background-color: rgb(255, 230, 204);
+            color: rgb(77, 88, 244);
+            padding: 5px;
+            text-align: center;
+            flex: 1;
+            text-align: left;
+        }
+        .flex-item-med {
+            background-color: rgb(255, 230, 204);
+            color: rgb(77, 88, 244);
+            padding: 5px;
+            text-align: center;
+            flex: 2;
+            text-align: right;
+        }
+        .flex-item-large {
+            background-color: rgb(255, 230, 204);
+            color: rgb(77, 88, 244);
+            padding: 5px;
+            text-align: center;
+            flex: 4;
+            font-size: 40px;
+            
+        }
+        .form-container {
+            text-align: right;
         }
 
         .button {
             position: absolute;
-            top: 600px;
-            border: 1px solid red;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            margin-top: 20px;
-            box-shadow: red 0 0 20px 2px;
-        }
-
-        #cursor {
-            position: fixed;
-            height: 150px;
-            width: 150px;
-            background: radial-gradient(circle, transparent 0%, black 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 4;
-            transform: translate(-50%, -50%);
+            top: 300px;
+            left: 300px;
+            z-index: 2;
+            
         }
     </style>
 </head>
 <body>
-    <div class="image" style="opacity:60%">
-        <img src="azazel_1.jpg" style="width: 70%">
-    </div>
+    <div class="form-container">
+        <form class="form">
+            <input id="search" type="text" class="input" placeholder="search..."/>
+            <button id="clear" class="clear-results">clear</button>
+        </form>
     <br>
-    <p id="hebrewText">ועזאל לימד בני אדם לעשות חרבות, וסכינים, ומגנים וחושינים, והודיע ​להם את מתכות האדמה ואת אומנות עיבודם, וצמידים וקישוטים, ושימוש באנטימון ובייפותם של. העפעפיים, וכל מיני אבנים יקרות, וכל תמיסות צביעה. וַיָּקָם רַב רַב אֱלֹהִים, וַיִּזְנוּ, וַיִּתְעוּ וַיִּשְׁחִיתוּ בְּכָל דַּרְכֵיהֶם.<br><br><br><br>ספר המשגיחים</p>
+    <div class="flexbox-container1">
+        <div class="flex-item-large">AngelMaker.com</div>
+        <br>
+        <!-- make title icon -->
+        <div class="flex-item-small"></div>
+        <br>
+        <div class="flex-item-med"> 
+            
+        </div>
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="flexbox-container1">
+        <div class="flex-item-small">
+            Dress up Games<br>
+            <br>
+            <a href="x.html">Home</a><br>
+            <a href="x.html">Animals</a><br>
+            <a href="x.html">Barbie Games</a><br>
+            <a href="x.html">Celebrity</a><br>
+            <a href="x.html">Cooking Games</a><br>
+            <a href="x.html">Dolls</a><br>
+            <a href="x.html">Dress Up</a><br>
+            <a href="x.html">Fantasy</a><br>
+            <a href="x.html">Fun</a><br>
+            <a href="x.html">Makeup</a><br>
+            <a href="x.html">Makeover</a><br>
+            <a href="x.html">Movies & TV</a><br>
+            <a href="x.html">Princess</a><br>
+            <a href="x.html">Puzzle</a><br>
+            <a href="x.html">Room Makeover Games</a><br>
+            <a href="x.html">More Games</a><br>
+            <br>
+            About<br>
+            <br>
+            <a href="x.html">Submit & Help</a><br>
+            <a href="x.html">FAQ & Contact</a><br>
+        </div>
+        <div class="flex-item-large">
+            <a href="aziangeldressupgame.html"> 
+                <img src="game-image.png" alt="Clickable Button" style="width: 500px; height: auto;"> 
+            </a> 
+        <br>
+        <br>
+        <br>
+        </div>
+        <div class="flex-item-small">
+            More Games<br>
+            <br>
+            <a href="x.html">Barbie® Home Eviction Notice Simulator!</a><br>
+            <a href="x.html">Night Out with Anna Dress Up</a><br>
+            <br>
+            <br>
+            <br>
+            Players Online<br>
+            <br>
+            RemyY2K 🇫🇷 <br>
+            SparkleBunn... 🇺🇸<br>
+            Flycats94 🇬🇧<br>
+            Dreamy_0cto 🇮🇪<br>
+            sk8tr_g1rl333 🇺🇸<br>
+            Griffinxoxo 🇺🇸<br>
+            FlashyGirl227 🇨🇦<br>
+            Eatsyouuu 🇨🇦<br>
+            sarahstar 🇺🇸 <br>
+            laurie_baby 🇺🇸 <br>
+            peony1815 🇬🇧<br>
+            <br>
+            <br>
+            <br>
+            <br>
+            powered by <i>Flesh Games©</i>
+        </div>
+    </div>
+    <audio src="723909__kevp888__2024-02-16_background-sound_game-music_remix.wav" autoplay loop></audio>
     
-    <p id="englishText">And Azâzêl taught men to make swords, and knives, and shields, and breastplates, and made known to them the metals of the earth and the art of working them, and bracelets, and ornaments, and the use of antimony, and the beautifying of the eyelids, and all kinds of costly stones, and all coloring tinctures. And there arose much godlessness, and they committed fornication, and they were led astray, and became corrupt in all their ways.<br><br>Book of the Watchers</p>
-    
-    <div class="button"><a href="summoning.html" style="color: red">CLICK TO CLEANSE</a></div>
-
-    <div id="cursor"></div>
-    <audio src="622603__nlux__choir-of-moaning-angels.wav" autoplay loop></audio>
-
-    <script> 
-        const cursor = document.getElementById("cursor");
-        const hebrewText = document.getElementById("hebrewText");
-        
-        document.addEventListener("mousemove", (e) => {
-            cursor.style.left = e.clientX + "px";
-            cursor.style.top = e.clientY + "px";            
-            const rect = hebrewText.getBoundingClientRect();           
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;           
-            const maskSize = 150;
-            hebrewText.style.webkitMaskImage = `radial-gradient(circle ${maskSize}px at ${x}px ${y}px, transparent 0%, black 50%)`;
-            hebrewText.style.maskImage = `radial-gradient(circle ${maskSize}px at ${x}px ${y}px, transparent 0%, black 50%)`;
-        });
-    </script>
 </body>
 </html>
-
-
-// Randomize position of draggable images > how do i get them to spread out and not get cut off?
-      function randomizePositions() {
-        $(".draggable-image").each(function() {
-          const maxTop = window.innerHeight - $(this).height();
-          const maxLeft = window.innerWidth - $(this).width();
-
-          const randomTop = Math.floor(Math.random() * maxTop);
-          const randomLeft = Math.floor(Math.random() * maxLeft);
-
-          $(this).css({ top: randomTop + "px", left: randomLeft + "px" });
-        });
-      } 
-
-      randomizePositions();
